@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\Events\MessageSent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,11 +38,11 @@ class ChatsController extends Controller
      * @param Request $_REQUEST
      * @return Response
      */
-    public function sendMessage()
+    public function sendMessage(Request $request)
     {
         $user = Auth::user();
 
-        $message = $user->messages()-create([
+        $message = $user->messages()->create([
             'message' => $request->input('message')
         ]);
 

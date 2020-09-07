@@ -11,26 +11,26 @@
 </template>
 
 <script>
-export default {
-    props: ['user'],
+    export default {
+        props: ['user'],
 
-    data(){
-        return {
-            newMessage: ''
-        }
-    },
+        data(){
+            return {
+                newMessage: ''
+            }
+        },
 
-    methods: {
-        sendMessage(){
-            this.$emit('messagesent', {
-                user: this.user,
-                message: this.newMessage
-            });
+        methods: {
+            sendMessage() {
+                this.$emit('messagesent', {
+                    user: this.user,
+                    message: this.newMessage
+                });
 
-            this.newMessage= ''
+                this.newMessage = ''
+            }
         }
     }
-}
 </script>
 
 <style>

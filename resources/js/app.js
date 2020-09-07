@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+// const { default: Echo } = require('laravel-echo');
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -38,6 +40,14 @@ const app = new Vue({
 
     created() {
         this.fetchMessages();
+
+        Echo.private('chat')
+        .listen('MessageSent', (e) => {
+            this.messages.push({
+                message: e.message.message,
+                user: e.user
+            });
+        });
     },
 
     methods: {
@@ -47,7 +57,7 @@ const app = new Vue({
             });
         },
 
-        addMessages() {
+        addMessage(message) {
             this.messages.push(message);
 
             axios.post('/messages', message).then(response => {
